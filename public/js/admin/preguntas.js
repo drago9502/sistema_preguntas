@@ -126,6 +126,7 @@ function registrarPregunta() {
                 }).then(() => {
                     // location.reload();
                     cargarTablaPreguntas();
+                     cerrarModales();
                 });
             } else {
                 Swal.fire({
@@ -173,6 +174,7 @@ function cerrarPregunta(id) {
                             confirmButtonText: "Cerrar",
                         }).then(() => {
                             cargarTablaPreguntas();
+                             cerrarModales();
                         });
                     } else {
                         Swal.fire({
