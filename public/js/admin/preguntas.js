@@ -124,7 +124,8 @@ function registrarPregunta() {
                     icon: "success",
                     confirmButtonText: "Cerrar",
                 }).then(() => {
-                    location.reload();
+                    // location.reload();
+                    cargarTablaPreguntas();
                 });
             } else {
                 Swal.fire({
