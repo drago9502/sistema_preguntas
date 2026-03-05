@@ -36,6 +36,9 @@
                         Fecha fin
                     </th>
                     <th>
+                        Imagen
+                    </th>
+                    <th>
                         Acciones
                     </th>
                     <th>
@@ -75,6 +78,11 @@
                                     <label for="fecha_termino">Fecha fin</label>
                                     <input type="date" class="form-control" id="fecha_termino" name="fecha_termino"
                                         required oninput="comprobarDatos()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagen">Imagen</label>
+                                    <input type="file" class="form-control"
+                                        id="imagen" name="imagen" >
                                 </div>
                             </form>
                         </div>
@@ -117,6 +125,14 @@
                                     <label for="fecha_termino">Fecha fin</label>
                                     <input type="date" class="form-control" id="fecha_termino" name="fecha_termino" required
                                         oninput="comprobarDatosEdit()">
+                                </div>
+                                 <div id="imagenActual">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagen">Modificar Imagen</label>
+                                    <input type="file" class="form-control"
+                                        id="imagen" name="imagen" >
                                 </div>
                             </form>
                         </div>

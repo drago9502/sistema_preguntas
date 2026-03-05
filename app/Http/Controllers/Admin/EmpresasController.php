@@ -28,9 +28,24 @@ class EmpresasController extends Controller
             ]
         );
         if ($validarDatos) {
+            $ruta = '';
+
+            if ($request->hasFile('imagen')) {
+
+                $extension = $request->file('imagen')->extension();
+
+                // Nombre personalizado
+                $nombre = $request->nombre . '.' . $extension;
+
+                // Guardar archivo
+                $ruta = $request->file('imagen')
+                    ->storeAs('empresas', $nombre, 'public');
+            }
+
             $empresa = Empresa::create([
                 'nombre' => $request->nombre,
-                'status' => '1'
+                'status' => '1',
+                'imagen' => $ruta
             ]);
             if ($empresa) {
                 return response()->json(['ok' => 'true'], 200);
@@ -58,10 +73,23 @@ class EmpresasController extends Controller
         if ($validarDatos) {
             $empresa = Empresa::find($request->id);
             if ($empresa) {
-                if ($empresa->update(['nombre' => $request->nombre])) {
-                    return response()->json(['ok' => 'true'],200);
+                $ruta = '';
+
+                if ($request->hasFile('imagen')) {
+
+                    $extension = $request->file('imagen')->extension();
+
+                    // Nombre personalizado
+                    $nombre = $request->nombre . '.' . $extension;
+
+                    // Guardar archivo
+                    $ruta = $request->file('imagen')
+                        ->storeAs('empresas', $nombre, 'public');
+                }
+                if ($empresa->update(['nombre' => $request->nombre,'imagen'=>$ruta])) {
+                    return response()->json(['ok' => 'true'], 200);
                 } else {
-                    return response()->json(['ok' => 'false'],400);
+                    return response()->json(['ok' => 'false'], 400);
                 }
             }
         } else {
@@ -73,9 +101,9 @@ class EmpresasController extends Controller
         $empresa = Empresa::find($id);
         if ($empresa) {
             if ($empresa->update(['status' => '0'])) {
-                return response()->json(['ok' => 'true'],200);
+                return response()->json(['ok' => 'true'], 200);
             } else {
-                return response()->json(['ok' => 'false'],400);
+                return response()->json(['ok' => 'false'], 400);
             }
         }
     }

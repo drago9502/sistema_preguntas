@@ -20,5 +20,6 @@ class Evento extends Model
         'fecha_inicio',
         'fecha_termino',
         'status',
+        'imagen'
     ];
 }

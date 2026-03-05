@@ -16,5 +16,6 @@ class Empresa extends Model
     protected $fillable = [
         'nombre',
         'status',
+        'imagen'
     ];
 }

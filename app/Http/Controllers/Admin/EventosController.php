@@ -44,12 +44,26 @@ class EventosController extends Controller
             ]
         );
         if ($validarDatos) {
+            $ruta = '';
+
+            if ($request->hasFile('imagen')) {
+
+                $extension = $request->file('imagen')->extension();
+
+                // Nombre personalizado
+                $nombre = $request->nombre . '.' . $extension;
+
+                // Guardar archivo
+                $ruta = $request->file('imagen')
+                    ->storeAs('eventos', $nombre, 'public');
+            }
             $evento = Evento::create([
                 'nombre' => $request->nombre,
                 'id_empresa' => $request->id_empresa,
                 'fecha_inicio' => $request->fecha_inicio,
                 'fecha_termino' => $request->fecha_termino,
-                'status' => '1'
+                'status' => '1',
+                'imagen' => $ruta
             ]);
             if ($evento) {
                 return response()->json(['ok' => 'true'], 200);
@@ -78,6 +92,19 @@ class EventosController extends Controller
             ]
         );
         if ($validarDatos) {
+            $ruta = '';
+
+            if ($request->hasFile('imagen')) {
+
+                $extension = $request->file('imagen')->extension();
+
+                // Nombre personalizado
+                $nombre = $request->nombre . '.' . $extension;
+
+                // Guardar archivo
+                $ruta = $request->file('imagen')
+                    ->storeAs('eventos', $nombre, 'public');
+            }
             $evento = Evento::find($request->id);
             if ($evento) {
                 if ($evento->update([
@@ -85,6 +112,7 @@ class EventosController extends Controller
                     'id_empresa' => $request->id_empresa,
                     'fecha_inicio' => $request->fecha_inicio,
                     'fecha_termino' => $request->fecha_termino,
+                    'imagen' => $ruta
                 ])) {
                     return response()->json(['ok' => 'true'], 200);
                 } else {

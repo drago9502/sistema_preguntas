@@ -9,6 +9,17 @@ $('#tablaEmpresas').DataTable({
         { data: 'id' },
         { data: 'nombre' },
         {
+            "data": 'imagen',
+
+            "render": function (data) {
+                let imagen = '';
+                if (data != null && data != '') {
+                    imagen = `<img src="/storage/${data}" height="100px">`;
+                }
+                return imagen;
+            }
+        },
+        {
             "data": 'id',
 
             "render": function (data) {
@@ -54,12 +65,15 @@ function comprobarDatosEdit() {
 comprobarDatosEdit();
 
 function registrarEmpresa() {
-    let data = $('#formRegistroEmpresa').serialize();
+    let form = document.getElementById('formRegistroEmpresa');
+    let data = new FormData(form);
     $.ajax({
         type: "POST",
         url: "/admin/empresa/add",
         data: data,
         dataType: "json",
+        processData: false,   // ❗ obligatorio
+        contentType: false,   // ❗ obligatorio
         success: function (response) {
             if (response) {
                 Swal.fire({
@@ -91,6 +105,7 @@ function registrarEmpresa() {
 function obtenerEmpresa(id) {
     $("#formEditarEmpresa #nombre").val();
     $("#formEditarEmpresa #id").val();
+    $("#formEditarEmpresa #imagenActual").empty();
     let url = `/admin/empresa/get/${id}`;
     $.ajax({
         type: "GET",
@@ -98,18 +113,26 @@ function obtenerEmpresa(id) {
         success: function (response) {
             $("#formEditarEmpresa #nombre").val(response.nombre);
             $("#formEditarEmpresa #id").val(response.id);
+            if (response.imagen != null && response.imagen != '') {
+                $("#formEditarEmpresa #imagenActual").append(`<img src="/storage/${response.imagen}" height="100px">`);
+            }
         }
     });
 }
 
 
 function editarEmpresa() {
-    let data = $('#formEditarEmpresa').serialize();
+    // let data = $('#formEditarEmpresa').serialize();
+
+    let form = document.getElementById('formEditarEmpresa');
+    let data = new FormData(form);
     $.ajax({
         type: "POST",
         url: "/admin/empresa/update",
         data: data,
         dataType: "json",
+        processData: false,   // ❗ obligatorio
+        contentType: false,   // ❗ obligatorio
         success: function (response) {
             if (response.ok) {
                 Swal.fire({
@@ -128,7 +151,7 @@ function editarEmpresa() {
                 });
             }
         },
-         error: function (errores) {
+        error: function (errores) {
             Swal.fire({
                 title: errores.responseJSON.message,
                 icon: "error",

@@ -13,6 +13,17 @@ $(document).ready(function () {
             { data: 'fecha_inicio' },
             { data: 'fecha_termino' },
             {
+                "data": 'imagen',
+
+                "render": function (data) {
+                    let imagen = '';
+                    if (data != null && data != '') {
+                        imagen = `<img src="/storage/${data}" height="100px">`;
+                    }
+                    return imagen;
+                }
+            },
+            {
                 "data": 'id',
 
                 "render": function (data, type, row) {
@@ -93,12 +104,16 @@ function comprobarDatosEdit() {
 comprobarDatosEdit();
 
 function registrarEvento() {
-    let data = $('#formRegistroEvento').serialize();
+    // let data = $('#formRegistroEvento').serialize();
+    let form = document.getElementById('formRegistroEvento');
+    let data = new FormData(form);
     $.ajax({
         type: "POST",
         url: "/admin/evento/add",
         data: data,
         dataType: "json",
+        processData: false,   // ❗ obligatorio
+        contentType: false,   // ❗ obligatorio
         success: function (response) {
             if (response) {
                 Swal.fire({
@@ -133,6 +148,8 @@ function obtenerEvento(id) {
     $("#formEditarEvento #nombre").val();
     $("#formEditarEvento #fecha_inicio").val();
     $("#formEditarEvento #fecha_termino").val();
+    $("#formEditarEvento #imagenActual").empty();
+
     let url = `/admin/evento/get/${id}`;
     $.ajax({
         type: "GET",
@@ -145,18 +162,27 @@ function obtenerEvento(id) {
             $("#formEditarEvento #nombre").val(response.nombre);
             $("#formEditarEvento #fecha_inicio").val(response.fecha_inicio);
             $("#formEditarEvento #fecha_termino").val(response.fecha_termino);
+
+            if (response.imagen != null && response.imagen != '') {
+                $("#formEditarEvento #imagenActual").append(`<img src="/storage/${response.imagen}" height="100px">`);
+            }
         }
     });
 }
 
 
 function editarEvento() {
-    let data = $('#formEditarEvento').serialize();
+    // let data = $('#formEditarEvento').serialize();
+
+    let form = document.getElementById('formEditarEvento');
+    let data = new FormData(form);
     $.ajax({
         type: "POST",
         url: "/admin/evento/update",
         data: data,
         dataType: "json",
+        processData: false,   // ❗ obligatorio
+        contentType: false,   // ❗ obligatorio
         success: function (response) {
             if (response.ok) {
                 Swal.fire({
