@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\PreguntasPusher;
+use App\Exports\ReportePreguntasDetalladoExport;
+use App\Exports\ReportePreguntasExport;
 use App\Http\Controllers\Controller;
 use App\Models\Asistente;
 use App\Models\AsistenteRespuesta;
@@ -12,6 +14,7 @@ use App\Models\Pregunta;
 use App\Models\PreguntaRespuesta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EventosController extends Controller
 {
@@ -185,7 +188,7 @@ class EventosController extends Controller
 
     public function eventoPreguntasObtener($id_evento)
     {
-        $preguntas = Pregunta::where('id_evento', $id_evento)->where('status', 1)->get();
+        $preguntas = Pregunta::where('id_evento', $id_evento)->where('status','!=',0)->get();
         foreach ($preguntas as $pregunta) {
             $opciones = PreguntaRespuesta::where('id_pregunta', $pregunta->id)->get();
             foreach ($opciones as $opcion) {
@@ -255,5 +258,28 @@ class EventosController extends Controller
         } else {
             return response()->json(['ok' => 'false'], 500);
         }
+    }
+
+     public function cerrarPregunta($id)
+    {
+        $pregunta = Pregunta::find($id);
+        if ($pregunta) {
+            if ($pregunta->update(['status' => '2'])) {
+                 broadcast(new PreguntasPusher($pregunta));
+                return response()->json(['ok' => 'true'], 200);
+            } else {
+                return response()->json(['ok' => 'false'], 400);
+            }
+        }
+    }
+
+    public function reportePreguntas($id_evento)
+    {
+         return Excel::download(new ReportePreguntasExport($id_evento), 'preguntas_evento.xlsx');
+    }
+
+     public function reportePreguntasDetallado($id_evento)
+    {
+         return Excel::download(new ReportePreguntasDetalladoExport($id_evento), 'preguntas_evento_detallado.xlsx');
     }
 }

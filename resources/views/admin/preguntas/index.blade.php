@@ -8,8 +8,11 @@
             <h1>Preguntas de: {{ $evento->nombre }} Registrados: {{ $registrados }}</h1>
         </div>
         <div class="col-6 text-right">
-            <a class="btn btn-warning" href="{{ URL('/admin/empresa-eventos', $evento->id) }}">Regresar</a>
+            <a class="btn btn-warning" href="{{ url()->previous() }}">Regresar</a>
+            <a href="{{URL('/admin/evento-preguntas-reporteExcel',$evento->id)}}" class="btn btn-success" target="_blank">Reporte</a>
+            <a href="{{URL('/admin/evento-preguntas-reporteExcelDetallado',$evento->id)}}" class="btn btn-success" target="_blank">Reporte detallado</a>
             @if ($evento->status == 2)
+                <a class="btn btn-primary" onclick="cargarTablaPreguntas();">Recargar preguntas</a>
                 <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddPregunta">Agregar Pregunta</a>
             @endif
         </div>
@@ -33,6 +36,9 @@
                     </th>
                     <th>
                         Estadisticas
+                    </th>
+                    <th>
+                        Acciones
                     </th>
                 </thead>
             </table>

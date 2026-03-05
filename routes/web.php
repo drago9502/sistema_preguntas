@@ -71,7 +71,11 @@ Route::middleware(['auth'])->group(function () {
     route::get('/admin/evento-preguntas/{id_evento}', [EventosController::class, 'eventoPreguntas']);
     route::get('/admin/evento-preguntas-obtener/{id_evento}', [EventosController::class, 'eventoPreguntasObtener']);
     route::post('/admin/evento-preguntas-registrar', [EventosController::class, 'eventoPreguntaRegistrar']);
+    route::get('/admin/evento-preguntas-cerrar/{id}', [EventosController::class, 'cerrarPregunta']);
 
+    // reportes excel
+    route::get('/admin/evento-preguntas-reporteExcel/{id_evento}', [EventosController::class, 'reportePreguntas']);
+    route::get('/admin/evento-preguntas-reporteExcelDetallado/{id_evento}', [EventosController::class, 'reportePreguntasDetallado']);
     // });
 
 
@@ -98,7 +102,7 @@ route::post('/evento/iniciar-sesion', [AsistentesController::class, 'inicioSesio
 Route::middleware('auth:asistente')->group(function () {
     route::get('/evento-preguntas/{id_evento}', [AsistentesController::class, 'eventoPreguntas']);
     route::get('/evento-preguntas-obtener/{id_evento}', [AsistentesController::class, 'eventoPreguntasObtener']);
-    route::get('/evento-pregunta-respuestas/{id_pregunta}',[AsistentesController::class,'preguntaRespuestas']);
-    route::post('/evento-agregar-respuesta',[AsistentesController::class,'agregarRespuesta']);
+    route::get('/evento-pregunta-respuestas/{id_pregunta}', [AsistentesController::class, 'preguntaRespuestas']);
+    route::post('/evento-agregar-respuesta', [AsistentesController::class, 'agregarRespuesta']);
     route::post('/asistentes/cerrarSesion', [AsistentesController::class, 'eliminarSesion'])->name('cerrarAsistente');
 });
