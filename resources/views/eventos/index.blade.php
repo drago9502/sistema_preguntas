@@ -35,11 +35,11 @@
                         <input type="text" class="form-control" placeholder="Introduce tu apellido paterno"
                             id="apellido_paterno" name="apellido_paterno" oninput="comprobarDatos();" required>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="apellido_materno">Apellido Materno</label>
                         <input type="text" class="form-control" placeholder="Introduce tu apellido materno"
                             id="apellido_materno" name="apellido_materno" oninput="comprobarDatos();" required>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label for="correo">Correo</label>

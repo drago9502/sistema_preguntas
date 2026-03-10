@@ -2,10 +2,10 @@ function comprobarDatos() {
     $('#bRegistro').addClass("d-none");
     let nombre = $('#FormAddAsistente #nombre').val();
     let apellido_paterno = $('#FormAddAsistente #apellido_paterno').val();
-    let apellido_materno = $('#FormAddAsistente #apellido_materno').val();
+    // let apellido_materno = $('#FormAddAsistente #apellido_materno').val();
     let correo = $('#FormAddAsistente #correo').val();
 
-    if (nombre != '' && apellido_paterno != '' && apellido_materno != '' && correo != '') {
+    if (nombre != '' && apellido_paterno != '' && correo != '') {
         $('#bRegistro').removeClass("d-none");
     }
 };

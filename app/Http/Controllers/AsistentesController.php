@@ -22,7 +22,7 @@ class AsistentesController extends Controller
                 'id_evento' => 'required|numeric',
                 'nombre' => 'required|string',
                 'apellido_paterno' => 'required|string',
-                'apellido_materno' => 'required|string',
+                // 'apellido_materno' => 'required|string',
                 'correo' => 'required|email'
             ]
         );
@@ -37,7 +37,7 @@ class AsistentesController extends Controller
                     'id_evento' => $request->id_evento,
                     'nombre' => $request->nombre,
                     'apellido_paterno' => $request->apellido_paterno,
-                    'apellido_materno' => $request->apellido_materno,
+                    // 'apellido_materno' => $request->apellido_materno,
                     'correo' => $request->correo,
                     'status' => '1'
                 ]);
