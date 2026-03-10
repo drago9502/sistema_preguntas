@@ -15,10 +15,10 @@ $(document).ready(function () {
             {
                 "data": 'imagen',
 
-                "render": function (data) {
+                "render": function (data,type, row) {
                     let imagen = '';
                     if (data != null && data != '') {
-                        imagen = `<img src="/storage/${data}" height="100px">`;
+                        imagen = `<img src="/storage/${data}?v=${row.updated_at}" height="100px">`;
                     }
                     return imagen;
                 }

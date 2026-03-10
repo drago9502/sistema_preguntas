@@ -87,7 +87,7 @@
             <table id="tablaPreguntas" style="width: 100%" class="table">
                 <thead>
                     <th>
-                        Numero
+                        #
                     </th>
                     <th>
                         Pregunta
