@@ -99,6 +99,9 @@ route::get('/evento/registro/{id_evento}', [EventosController::class, 'registroE
 route::post('/evento/registroAsistente', [AsistentesController::class, 'asistenteAdd']);
 route::post('/evento/iniciar-sesion', [AsistentesController::class, 'inicioSesion']);
 
+route::get('/evento/sala-espera/{id_evento}', [AsistentesController::class, 'salaEspera']);
+route::get('/evento/obtener-estado/{id_evento}', [AsistentesController::class, 'obtenerEstadoEvento']);
+
 Route::middleware('auth:asistente')->group(function () {
     route::get('/evento-preguntas/{id_evento}', [AsistentesController::class, 'eventoPreguntas']);
     route::get('/evento-preguntas-obtener/{id_evento}', [AsistentesController::class, 'eventoPreguntasObtener']);

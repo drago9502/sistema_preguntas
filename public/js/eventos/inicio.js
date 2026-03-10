@@ -24,9 +24,9 @@ function registrarAsistente() {
                     title: "El registro se ha registrdo correctamente",
                     text: "Se ha registrado exitosamente",
                     icon: "success",
-                    confirmButtonText: "Cerrar",
+                    confirmButtonText: "Ok",
                 }).then(() => {
-                    location.reload();
+                     window.location.href=response.url;
                 });
             }
              if (xhr.status === 230) {
@@ -34,9 +34,9 @@ function registrarAsistente() {
                     title: "Este usuario ya esta registrado en este evento",
                     text: "Se ha obtenido informacion exitosamente",
                     icon: "success",
-                    confirmButtonText: "Cerrar",
+                    confirmButtonText: "Ok",
                 }).then(() => {
-                    location.reload();
+                     window.location.href=response.url;
                 });
              }
         },

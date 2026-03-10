@@ -16,6 +16,7 @@ class AsistentesController extends Controller
     //
     public function asistenteAdd(Request $request)
     {
+        $url='';
         $validarDatos = $request->validate(
             [
                 'id_evento' => 'required|numeric',
@@ -29,7 +30,8 @@ class AsistentesController extends Controller
         if ($validarDatos) {
             $verificarAsistente = Asistente::where('id_evento', $request->id_evento)->where('correo', $request->correo)->where('status', 1)->first();
             if (!empty($verificarAsistente)) {
-                return response()->json(['ok' => 'true'], 230);
+                 $url='/evento/sala-espera/'.base64_encode($request->id_evento);
+                return response()->json(['ok' => 'true','url'=>$url], 230);
             } else {
                 $asistente = Asistente::create([
                     'id_evento' => $request->id_evento,
@@ -40,13 +42,35 @@ class AsistentesController extends Controller
                     'status' => '1'
                 ]);
                 if ($asistente) {
-                    return response()->json(['ok' => 'true'], 200);
+                    $url='/evento/sala-espera/'.base64_encode($request->id_evento);
+                    return response()->json(['ok' => 'true','url'=>$url], 200);
                 } else {
-                    return response()->json(['ok' => 'false'], 400);
+                    return response()->json(['ok' => 'false','url'=>$url], 400);
                 }
             }
         } else {
-            return response()->json(['ok' => 'false'], 500);
+            return response()->json(['ok' => 'false','url'=>$url], 500);
+        }
+    }
+
+    public function salaEspera($idEvento)
+    {
+        $id=base64_decode($idEvento);
+        $evento=Evento::find($id);
+        return view('eventos.sala_espera',['evento'=>$evento]);
+    }
+
+    public function obtenerEstadoEvento($idEvento)
+    {
+        $estado=0;
+         $url='';
+        $evento=Evento::find($idEvento);
+        if($evento){
+            $estado=$evento->status;
+            $url='/evento/registro/'.base64_encode($evento->id);
+            return response()->json(['ok' => 'true','estado'=>$estado,'url'=>$url], 200);
+        }else{
+             return response()->json(['ok' => 'true','estado'=>$estado,'url'=>$url], 500);
         }
     }
 
