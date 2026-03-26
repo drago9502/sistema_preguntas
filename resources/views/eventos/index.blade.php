@@ -52,7 +52,7 @@
                             <input type="email" class="form-control" placeholder="Introduce tu correo" id="correo"
                                 name="correo" oninput="comprobarDatos();" required>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="registrarAsistente();"
+                        <button type="button" class="btn btn-primary my-2" onclick="registrarAsistente();"
                             id="bRegistro">Registarme</button>
                     </form>
                 </div>
@@ -75,7 +75,7 @@
                             <input type="email" class="form-control" placeholder="Introduce tu correo" id="correo"
                                 name="correo">
                         </div>
-                        <button type="submit" class="btn btn-primary">Iniciar</button>
+                        <button type="submit" class="btn btn-primary my-2">Iniciar</button>
                     </form>
                 </div>
             </div>
