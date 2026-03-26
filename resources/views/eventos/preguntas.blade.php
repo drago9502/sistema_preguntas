@@ -118,11 +118,11 @@
                                 <input type="hidden" id="id_evento" name="id_evento" value="{{ $evento->id }}">
                                 <input type="hidden" name="id_pregunta" id="id_pregunta">
                                 <input type="hidden" name="id_asistente" id="id_asistente" value="{{Auth::guard('asistente')->user()->id}}">
-                                <div class="form-group">
+                                <div class="form-group my-4">
                                     <label for="pregunta" id="pregunta"></label>
                                 </div>
 
-                                <div class="row" id="respuestas">
+                                <div class="row my-4" id="respuestas">
 
                                 </div>
 
@@ -134,7 +134,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" onclick="registrarRespuesta();"
-                        id="bRegistro">Guardar</button>
+                        id="bRegistro">Enviar respuesta</button>
                 </div>
             </div>
         </div>
