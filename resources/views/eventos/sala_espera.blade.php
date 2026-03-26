@@ -15,7 +15,7 @@
     <div class="row">
         <input type="hidden" name="idEvento" id="idEvento" value="{{$evento->id}}">
         <div class="col">
-            Espera hasta que se active el acceso
+            Permanece en espera hasta que se active el acceso.
         </div>
     </div>
     <script>
