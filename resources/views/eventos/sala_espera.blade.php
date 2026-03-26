@@ -11,7 +11,12 @@
             </h2>
         </div>
     </div>
-
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <img src="{{ asset('storage/' . $evento->imagen) }}" class="img-fluid mx-auto d-block" style="max-width: 300px;"
+                alt="">
+        </div>
+    </div>
     <div class="row">
         <input type="hidden" name="idEvento" id="idEvento" value="{{$evento->id}}">
         <div class="col">
