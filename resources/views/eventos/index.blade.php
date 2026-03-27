@@ -55,6 +55,7 @@
                          <div class="form-group">
                             <label for="correo">Modalidad</label>
                             <select name="modalidad" id="modalidad" class="form-control" oninput="comprobarDatos();" required>
+                                <option value="">Selecciona tu modalidad</option>
                                 <option value="Presencial">Presencial</option>
                                 <option value="Virtual">Virtual</option>
                             </select>
