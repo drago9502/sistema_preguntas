@@ -183,12 +183,14 @@ class EventosController extends Controller
         $id = base64_decode($id_evento);
         $evento = Evento::find($id);
         $registrados = Asistente::where('id_evento', $evento->id)->where('status', 1)->count();
-        return view('admin.preguntas.index', ['evento' => $evento, 'registrados' => $registrados]);
+        $presenciales = Asistente::where('id_evento', $evento->id)->where('status', 1)->where('modalidad', 'Presencial')->count();
+        $virtuales = Asistente::where('id_evento', $evento->id)->where('status', 1)->where('modalidad', 'Virtual')->count();
+        return view('admin.preguntas.index', ['evento' => $evento, 'registrados' => $registrados, 'virtuales' => $virtuales, 'presenciales' => $presenciales]);
     }
 
     public function eventoPreguntasObtener($id_evento)
     {
-        $preguntas = Pregunta::where('id_evento', $id_evento)->where('status','!=',0)->get();
+        $preguntas = Pregunta::where('id_evento', $id_evento)->where('status', '!=', 0)->get();
         foreach ($preguntas as $pregunta) {
             $opciones = PreguntaRespuesta::where('id_pregunta', $pregunta->id)->get();
             foreach ($opciones as $opcion) {
@@ -202,7 +204,17 @@ class EventosController extends Controller
             }
             $contadorPregunta = AsistenteRespuesta::where('id_evento', $id_evento)
                 ->where('id_pregunta', $pregunta->id)->count();
+            $presenciales = AsistenteRespuesta::where('asistente_respuestas.id_evento', $id_evento)
+                ->join('asistentes', 'asistente_respuestas.id_asistente', 'asistentes.id')
+                ->where('asistente_respuestas.id_pregunta', $pregunta->id)
+                ->where('id_pregunta', $pregunta->id)->where('modalidad', 'Presencial')->count();
+            $virtuales = AsistenteRespuesta::where('asistente_respuestas.id_evento', $id_evento)
+                ->join('asistentes', 'asistente_respuestas.id_asistente', 'asistentes.id')
+                ->where('asistente_respuestas.id_pregunta', $pregunta->id)
+                ->where('asistentes.modalidad', 'Virtual')->count();
             $pregunta->participaciones = $contadorPregunta;
+            $pregunta->presenciales = $presenciales;
+            $pregunta->virtuales = $virtuales;
             $pregunta->opciones = $opciones;
         }
 
@@ -260,12 +272,12 @@ class EventosController extends Controller
         }
     }
 
-     public function cerrarPregunta($id)
+    public function cerrarPregunta($id)
     {
         $pregunta = Pregunta::find($id);
         if ($pregunta) {
             if ($pregunta->update(['status' => '2'])) {
-                 broadcast(new PreguntasPusher($pregunta));
+                broadcast(new PreguntasPusher($pregunta));
                 return response()->json(['ok' => 'true'], 200);
             } else {
                 return response()->json(['ok' => 'false'], 400);
@@ -275,11 +287,11 @@ class EventosController extends Controller
 
     public function reportePreguntas($id_evento)
     {
-         return Excel::download(new ReportePreguntasExport($id_evento), 'preguntas_evento.xlsx');
+        return Excel::download(new ReportePreguntasExport($id_evento), 'preguntas_evento.xlsx');
     }
 
-     public function reportePreguntasDetallado($id_evento)
+    public function reportePreguntasDetallado($id_evento)
     {
-         return Excel::download(new ReportePreguntasDetalladoExport($id_evento), 'preguntas_evento_detallado.xlsx');
+        return Excel::download(new ReportePreguntasDetalladoExport($id_evento), 'preguntas_evento_detallado.xlsx');
     }
 }

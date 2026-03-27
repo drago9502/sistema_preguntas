@@ -50,7 +50,7 @@ function cargarTablaPreguntas() {
                 "data": 'id',
 
                 "render": function (data, type, row) {
-                    return `Participaciones: ${row.participaciones}`;
+                    return `Participaciones: ${row.participaciones} <br> Presenciales: ${row.presenciales} <br> Virtuales: ${row.virtuales}`;
                 }
             },
              {

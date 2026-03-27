@@ -5,7 +5,7 @@
 @section('encabezado')
     <div class="row">
         <div class="col-6">
-            <h1>Preguntas de: {{ $evento->nombre }} Registrados: {{ $registrados }}</h1>
+            <h1>Preguntas de: {{ $evento->nombre }} Registrados: {{ $registrados }}  Presenciales: {{$presenciales}} Virtuales: {{$virtuales}}</h1>
         </div>
         <div class="col-6 text-right">
             <a class="btn btn-warning" href="{{ url()->previous() }}">Regresar</a>
