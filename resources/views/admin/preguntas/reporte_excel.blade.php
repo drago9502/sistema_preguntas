@@ -49,7 +49,9 @@
                         @endforelse
                     </td>
                     <td style=" border: 1px solid black; border-collapse: collapse;">
-                       Participaciones: {{ $pregunta->participaciones }}
+                       Participaciones: {{ $pregunta->participaciones }} <br>
+                       Presenciales: {{ $pregunta->presenciales }} <br> 
+                       Virtuales: {{ $pregunta->virtuales }}
                     </td>
                 </tr>
 
