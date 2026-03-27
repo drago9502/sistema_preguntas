@@ -31,7 +31,7 @@ class ReportePreguntasDetalladoExport implements FromView, ShouldAutoSize
             $respuestas = DB::table('asistente_respuestas')
                 ->leftJoin('asistentes', 'asistente_respuestas.id_asistente', 'asistentes.id')
                 ->leftJoin('pregunta_respuestas', 'asistente_respuestas.id_respuesta', 'pregunta_respuestas.id')
-                ->select('asistente_respuestas.*', 'asistentes.correo as correo', 'pregunta_respuestas.respuesta as respuesta')
+                ->select('asistente_respuestas.*', 'asistentes.correo as correo', 'pregunta_respuestas.respuesta as respuesta','asistentes.modalidad')
                 ->selectRaw("CONCAT_WS(' ', asistentes.nombre, asistentes.apellido_paterno, asistentes.apellido_materno) as asistente")
                 ->where('asistente_respuestas.id_pregunta',$pregunta->id)
                 ->get();

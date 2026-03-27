@@ -39,6 +39,9 @@
                 <th style=" border: 1px solid black; border-collapse: collapse;background-color: lightgray ; color: black">
                     Correo
                 </th>
+                 <th style=" border: 1px solid black; border-collapse: collapse;background-color: lightgray ; color: black">
+                    Modalidad
+                </th>
                 <th style=" border: 1px solid black; border-collapse: collapse;background-color: lightgray ; color: black">
                     Fecha y hora envió
                 </th>
@@ -58,6 +61,9 @@
                     </td>
                     <td style=" border: 1px solid black; border-collapse: collapse;">
                         {{ $respuesta->correo }}
+                    </td>
+                    <td style=" border: 1px solid black; border-collapse: collapse;">
+                        {{ $respuesta->modalidad }}
                     </td>
                      <td style=" border: 1px solid black; border-collapse: collapse;">
                         {{ $respuesta->created_at }}
