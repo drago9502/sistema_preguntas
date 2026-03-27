@@ -19,7 +19,7 @@
          <table style="width: 100%" class="tablas">
         <thead>
             <tr>
-                <th style=" border: 1px solid black; border-collapse: collapse;background-color: yellow ; color: black" colspan="3">
+                <th style=" border: 1px solid black; border-collapse: collapse;background-color: yellow ; color: black" colspan="4">
                     Pregunta: {{$pregunta->numero}}-{{$pregunta->pregunta}}
                 </th>
                 <th style=" border: 1px solid black; border-collapse: collapse;background-color: yellow ; color: black">
