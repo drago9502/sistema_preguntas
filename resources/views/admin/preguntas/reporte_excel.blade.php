@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <h1 style="text-align: center">Reporte {{ $evento->nombre }} Registrados: {{$registrados}}</h1>
+    <h1 style="text-align: center">Reporte {{ $evento->nombre }} Registrados: {{$registrados}} Presenciales: {{$presenciales}} Virtuales: {{$virtuales}}</h1>
 
     {{-- egresos --}}
     <table style="width: 100%" class="tablas">

@@ -28,6 +28,8 @@ class ReportePreguntasExport implements FromView, ShouldAutoSize
     {
         $evento = Evento::find($this->idEvento);
         $registrados = Asistente::where('id_evento', $evento->id)->where('status', 1)->count();
+        $presenciales = Asistente::where('id_evento', $evento->id)->where('status', 1)->where('modalidad', 'Presencial')->count();
+        $virtuales = Asistente::where('id_evento', $evento->id)->where('status', 1)->where('modalidad', 'Virtual')->count();
         $preguntas = Pregunta::where('id_evento', $evento->id)->where('status', '!=', 0)->orderBy('numero', 'asc')->get();
         foreach ($preguntas as $pregunta) {
             $opciones = PreguntaRespuesta::where('id_pregunta', $pregunta->id)->get();
@@ -55,6 +57,6 @@ class ReportePreguntasExport implements FromView, ShouldAutoSize
             $pregunta->virtuales = $virtuales;
             $pregunta->opciones = $opciones;
         }
-        return view('admin.preguntas.reporte_excel', ['evento' => $evento, 'preguntas' => $preguntas, 'registrados' => $registrados]);
+        return view('admin.preguntas.reporte_excel', ['evento' => $evento, 'preguntas' => $preguntas, 'registrados' => $registrados,'virtuales' => $virtuales, 'presenciales' => $presenciales]);
     }
 }
