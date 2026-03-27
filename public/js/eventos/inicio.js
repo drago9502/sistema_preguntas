@@ -4,8 +4,9 @@ function comprobarDatos() {
     let apellido_paterno = $('#FormAddAsistente #apellido_paterno').val();
     // let apellido_materno = $('#FormAddAsistente #apellido_materno').val();
     let correo = $('#FormAddAsistente #correo').val();
+     let modalidad=$('#FormAddAsistente #modalidad').val();
 
-    if (nombre != '' && apellido_paterno != '' && correo != '') {
+    if (nombre != '' && apellido_paterno != '' && correo != '' && modalidad!='') {
         $('#bRegistro').removeClass("d-none");
     }
 };

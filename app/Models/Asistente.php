@@ -21,6 +21,7 @@ class Asistente extends Authenticatable
         'apellido_paterno',
         'apellido_materno',
         'correo',
-        'status'
+        'status',
+        'modalidad'
     ];
 }

@@ -52,6 +52,13 @@
                             <input type="email" class="form-control" placeholder="Introduce tu correo" id="correo"
                                 name="correo" oninput="comprobarDatos();" required>
                         </div>
+                         <div class="form-group">
+                            <label for="correo">Modalidad</label>
+                            <select name="modalidad" id="modalidad" class="form-control" oninput="comprobarDatos();" required>
+                                <option value="Presencial">Presencial</option>
+                                <option value="Virtual">Virtual</option>
+                            </select>
+                        </div>
                         <button type="button" class="btn btn-primary my-2" onclick="registrarAsistente();"
                             id="bRegistro">Registarme</button>
                     </form>

@@ -22,6 +22,7 @@ class AsistentesController extends Controller
                 'id_evento' => 'required|numeric',
                 'nombre' => 'required|string',
                 'apellido_paterno' => 'required|string',
+                'modalidad'=>'required',
                 // 'apellido_materno' => 'required|string',
                 'correo' => 'required|email'
             ]
@@ -39,7 +40,8 @@ class AsistentesController extends Controller
                     'apellido_paterno' => $request->apellido_paterno,
                     // 'apellido_materno' => $request->apellido_materno,
                     'correo' => $request->correo,
-                    'status' => '1'
+                    'status' => '1',
+                    'modalidad'=>$request->modalidad
                 ]);
                 if ($asistente) {
                     $url='/evento/sala-espera/'.base64_encode($request->id_evento);
